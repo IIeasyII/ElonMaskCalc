@@ -61,7 +61,7 @@ namespace EM.Calc.ConsoleApp
             }
 
             // Результат операции
-            var result = calc.Execute(operation, values, accuracy);
+            var result = calc.Execute(operation, values);
 
             Console.WriteLine(result);
 

@@ -80,7 +80,7 @@ namespace EM.Calc.Core
             }*/
         }
 
-        public double? Execute(string operName, double[] values, int accuracy)
+        public double? Execute(string operName, double[] values)
         {
             foreach (var item in Operations)
             {
@@ -88,7 +88,6 @@ namespace EM.Calc.Core
                 {
                     item.Operands = values;
                     item.Execute();
-                    item.Accuracy(accuracy);
                     return item.Result;
                 }
             }

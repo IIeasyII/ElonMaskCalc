@@ -22,10 +22,5 @@ namespace EM.Calc.Core
             Result = Double.PositiveInfinity;
             return Result;
         }
-
-        public double? Accuracy(int accuracy)
-        {
-            return Math.Round(Convert.ToDouble(Result), accuracy);
-        }
     }
 }

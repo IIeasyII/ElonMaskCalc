@@ -16,7 +16,17 @@ namespace EM.Calc.WinCalc
         {
             InitializeComponent();
 
+            helpText();
+
             calc = new Core.Calc();
+        }
+
+        private void helpText()
+        {
+            cbOperation.Text = "Выберите операцию";
+
+            tbInput.Text = "Какие ваши аргументы";
+            tbInput.ForeColor = Color.Gray;
         }
 
         private Core.Calc calc { get; set; }
@@ -34,16 +44,72 @@ namespace EM.Calc.WinCalc
 
         private void btnExec_Click(object sender, EventArgs e)
         {
-            var values = tbInput.Text
-                .Split(' ')
-                .Select(Convert.ToDouble)
-                .ToArray();
+            var str = System.Text.RegularExpressions.Regex.Replace(tbInput.Text, @"\s+", " ");
 
-            var operation = cbOperation.Text;
+            try {
+                var values = str.Split(' ')
+                    .Select(Convert.ToDouble)
+                    .ToArray();
 
-            var result = calc.Execute(operation, values, 2);
+                var operation = cbOperation.Text;
 
-            lResult.Text = $"{result}";
+                var result = calc.Execute(operation, values);
+
+                lResult.Text = $"{result}";
+            }
+            catch(Exception ex)
+            {
+
+            }
+        }
+        
+        private void tbInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var symbol = e.KeyChar;
+
+            // Проверка на ввод цифр и запятой
+            if (char.IsDigit(symbol) == true || symbol != 43) return;
+
+            // Доступ в Backspace и Space
+            if (e.KeyChar == Convert.ToChar(Keys.Back) || e.KeyChar == Convert.ToChar(Keys.Space)) return;
+            
+            e.Handled = true;
+        }
+        
+        private void tbInput_Enter(object sender, EventArgs e)
+        {
+                tbInput.Text = null;
+                tbInput.ForeColor = Color.Black;
+        }
+
+        private void tbInput_Leave(object sender, EventArgs e)
+        {
+            if(tbInput.Text == "")
+            {
+                tbInput.Text = "Какие ваши аргументы";
+                tbInput.ForeColor = Color.Gray;
+            }
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            cbOperation.Text = "sum";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            cbOperation.Text = "pow";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            cbOperation.Text = "new";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            cbOperation.Text = "ras";
         }
     }
 }

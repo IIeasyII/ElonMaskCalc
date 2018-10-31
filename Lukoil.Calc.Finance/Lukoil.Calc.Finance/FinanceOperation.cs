@@ -20,10 +20,5 @@ namespace Lukoil.Calc.Finance
             Result = new Random().NextDouble() * new Random().NextDouble();
             return Result;
         }
-
-        public double? Accuracy(int accuracy)
-        {
-            return Math.Round(Convert.ToDouble(Result), accuracy);
-        }
     }
 }

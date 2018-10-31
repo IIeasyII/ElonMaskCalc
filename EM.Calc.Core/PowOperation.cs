@@ -26,10 +26,5 @@ namespace EM.Calc.Core
 
             return Result;
         }
-
-        public double? Accuracy(int accuracy)
-        {
-            return Math.Round(Convert.ToDouble(Result), accuracy);
-        }
     }
 }

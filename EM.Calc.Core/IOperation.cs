@@ -30,11 +30,5 @@ namespace EM.Calc.Core
         /// Получить результат
         /// </summary>
         double? Result { get; }
-
-        /// <summary>
-        /// Получение нужной точности
-        /// </summary>
-        /// <returns>Значение нужной точности</returns>
-        double? Accuracy(int accuracy);
     }
 }
