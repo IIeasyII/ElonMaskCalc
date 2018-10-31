@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,29 +14,71 @@ namespace EM.Calc.ConsoleApp
         {
             Core.Calc calc = new Core.Calc();
 
-            var input = Console.ReadLine();
+            // найти файл с операцией
 
-            object array = splitArray(input);
+            // загрузить этот файл
+            // найти в нем операцию
+            
+            // добавить операцию в калькулятор
 
-            object result = new object();
 
-            switch (input.Split(Convert.ToChar(" "))[0])
+
+
+
+            double[] values;
+
+            string operation, operands;
+
+            int accuracy = 0;
+
+            string[] operations = calc.Operations
+                .Select(o => o.Name)
+                .ToArray();
+
+            // Проверяем заполненность стартовой консоли
+            if(args.Length == 0)
             {
-                case "sum":
-                    result = calc.Sum(array);
-                    break;
-                case "ras":
-                    result = calc.Ras(array);
-                    break;
-                case "pow":
-                    result = calc.Pow(array);
-                    break;
+                Console.WriteLine("List operations: ");
+                foreach (var item in operations)
+                {
+                    Console.WriteLine(item);
+                }
+                Console.WriteLine("Enter operations: ");
+                operation = Console.ReadLine();
+
+                Console.WriteLine("Enter operands: ");
+                operands = Console.ReadLine();
+
+                Console.WriteLine("Enter accuracy: ");
+                accuracy = int.Parse(Console.ReadLine());
+
+                values = convertToDouble(operands.Split(new[] { " ", ";" }, StringSplitOptions.RemoveEmptyEntries));
+            }
+            else // Берем операцию и значения из стартовой консоли
+            {
+                operation = args[0].ToLower();
+                values = convertToDouble(args, 1);
             }
 
-            Console.Write(Convert.ToString(result));
+            // Результат операции
+            var result = calc.Execute(operation, values, accuracy);
+
+            Console.WriteLine(result);
+
             Console.ReadKey();
         }
 
+        private static double[] convertToDouble(string[] args, int start = 0)
+        {
+            return args
+                .Skip(start)
+                .Select(n => Convert.ToDouble(n))
+                .ToArray();
+        }
+
+
+        #region
+        [Obsolete]
         private static object splitArray(string str)
         {
             var array = str.Split(Convert.ToChar(" "));
@@ -56,6 +99,7 @@ namespace EM.Calc.ConsoleApp
             }
         }
 
+        [Obsolete]
         private static double[] doubleArray(ArrayList array)
         {
             List<double> termsList = new List<double>();
@@ -65,6 +109,7 @@ namespace EM.Calc.ConsoleApp
 
             return termsList.ToArray<double>();
         }
+        #endregion
     }
 
 }
