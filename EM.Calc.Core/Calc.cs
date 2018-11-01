@@ -16,15 +16,32 @@ namespace EM.Calc.Core
         /// </summary>
         public IList<IOperation> Operations { get; set; }
 
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
+        }
+
         public Calc()
         {
             Operations = new List<IOperation>();
 
-            //Получаю пути до dll файлов проекта
-            var listDllFiles = Directory.GetFiles(Environment.CurrentDirectory, "*.dll");
+            var path = AssemblyDirectory;
 
-            foreach(var dll in listDllFiles)
+            //Получаю пути до dll файлов проекта
+            var dllFiles = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
+
+            foreach (var dll in dllFiles)
             {
+                LoadOperations(Assembly.LoadFrom(dll));
+
+                /*
+
                 //Получить сборку по указанному пути
                 Assembly asm = Assembly.LoadFile(dll);
 
@@ -50,23 +67,24 @@ namespace EM.Calc.Core
                             Operations.Add(operation);
                         }
                     }
-                }
+                }*/
             }
-                
+        }
 
+        private void LoadOperations(Assembly assembly)
+        {
+            // загрузить все типы из сборки
+            var types = assembly.GetTypes();
 
-            /*//Получить текущую сборку
-            var asm = Assembly.GetExecutingAssembly();
+            var needType = typeof(IOperation);
 
-            //загрузить все типы из сборки
-            var types = asm.GetTypes();
-
-
-            //перебираем все классы в сборке
-            foreach (var item in types)
+            // перебираем все классы в сборке
+            foreach (var item in types.Where(t => t.IsClass && !t.IsAbstract))
             {
-                //если класс реализует заданный интерфейс
-                if (item.GetInterface("IOperation") != null)
+                var interfaces = item.GetInterfaces();
+
+                // если класс реализаует заданный интерфейс
+                if (interfaces.Contains(needType))
                 {
                     //добавляем в операции экземпляр данного класса
                     var instance = Activator.CreateInstance(item);
@@ -77,7 +95,7 @@ namespace EM.Calc.Core
                         Operations.Add(operation);
                     }
                 }
-            }*/
+            }
         }
 
         public double? Execute(string operName, double[] values)
