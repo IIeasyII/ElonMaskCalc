@@ -9,13 +9,19 @@ namespace EM.Calc.Core
     /// <summary>
     /// Нахождение разности между элементами массива
     /// </summary>
-    class RasOperation : IOperation
+    class RasOperation : IExtOperation
     {
         public string Name => "ras";
 
         public double[] Operands { get; set; }
 
         public double? Result { get; private set; }
+
+        public Guid Uid => new Guid("{F99119D4-7EB3-4FFB-98F5-380D1D35DC11}");
+
+        public int? ArgCount => 2;
+
+        public string Description => "Разность";
 
         public double? Execute()
         {

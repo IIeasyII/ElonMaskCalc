@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EM.Calc.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -68,7 +69,7 @@ namespace EM.Calc.WinCalc
             var symbol = e.KeyChar;
 
             // Проверка на ввод цифр и запятой
-            if (char.IsDigit(symbol) == true || symbol != 43) return;
+            if (char.IsDigit(symbol) == true || symbol != 43 || symbol != 45) return;
 
             // Доступ в Backspace и Space
             if (e.KeyChar == Convert.ToChar(Keys.Back) || e.KeyChar == Convert.ToChar(Keys.Space)) return;
@@ -110,6 +111,22 @@ namespace EM.Calc.WinCalc
         private void button3_Click(object sender, EventArgs e)
         {
             cbOperation.Text = "ras";
+        }
+
+        private void cbOperation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var operation = calc.Operations
+                .OfType<IExtOperation>()
+                .FirstOrDefault(o => o.Name == cbOperation.Text);
+
+            if (operation != null)
+            {
+                toolTip1.SetToolTip(cbOperation, operation.Description);
+            }
+            else
+            {
+                toolTip1.SetToolTip(cbOperation, "Старая операция");
+            }
         }
     }
 }

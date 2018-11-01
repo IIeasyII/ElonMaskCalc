@@ -34,7 +34,7 @@ namespace EM.Calc.Core
                 var needType = typeof(IOperation);
 
                 //Пройтись по ним
-                foreach (var item in types)
+                foreach (var item in types.Where(t => t.IsClass && !t.IsAbstract))
                 {
                     var interfaces = item.GetInterface(needType.ToString());
 
