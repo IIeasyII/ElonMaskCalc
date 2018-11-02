@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EM.Calc.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,9 +15,15 @@ namespace EM.Calc.Web.Controllers
 
             var result = calc.Execute(oper, values);
 
-            ViewBag.Result = result;
+            //ViewData.Model = result;
 
-            return View();
+            var model = new OperationResult()
+            {
+                Name = oper,
+                Result = result
+            };
+
+            return View(model);
         }
     }
 }

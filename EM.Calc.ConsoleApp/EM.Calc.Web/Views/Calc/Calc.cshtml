@@ -1,6 +1,8 @@
-﻿
+﻿@using EM.Calc.Web.Models
+@model OperationResult
+
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -12,7 +14,8 @@
 </head>
 <body>
     <div>
-        <p>Результат: @ViewBag.Result</p>
+        <h2>Операция: @Model.Name </h2>
+        <p>Результат: @Model.Result</p>
     </div>
 </body>
 </html>
