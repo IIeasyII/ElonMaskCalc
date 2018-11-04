@@ -16,59 +16,32 @@ namespace EM.Calc.Core
         /// </summary>
         public IList<IOperation> Operations { get; set; }
 
-        public static string AssemblyDirectory
+        public Calc() : this("")
         {
-            get
-            {
-                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                UriBuilder uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
-                return Path.GetDirectoryName(path);
-            }
+
         }
 
-        public Calc()
+        public Calc(string path)
         {
             Operations = new List<IOperation>();
 
-            var path = AssemblyDirectory;
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                path = Environment.CurrentDirectory;
+            }
+            else
+            {
+                LoadOperations(Assembly.GetExecutingAssembly());
+            }
+            
 
-            //Получаю пути до dll файлов проекта
+            /*//Получаю пути до dll файлов проекта
             var dllFiles = Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories);
 
             foreach (var dll in dllFiles)
             {
                 LoadOperations(Assembly.LoadFrom(dll));
-
-                /*
-
-                //Получить сборку по указанному пути
-                Assembly asm = Assembly.LoadFile(dll);
-
-                //Взять у неё все типы
-                var types = asm.GetTypes();
-
-                var needType = typeof(IOperation);
-
-                //Пройтись по ним
-                foreach (var item in types.Where(t => t.IsClass && !t.IsAbstract))
-                {
-                    var interfaces = item.GetInterface(needType.ToString());
-
-                    //если класс реализует заданный интерфейс
-                    if (item.GetInterface("IOperation") != null)
-                    {
-                        //добавляем в операции экземпляр данного класса
-                        var instance = Activator.CreateInstance(item);
-
-                        var operation = instance as IOperation;
-                        if (operation != null)
-                        {
-                            Operations.Add(operation);
-                        }
-                    }
-                }*/
-            }
+            }*/
         }
 
         private void LoadOperations(Assembly assembly)
