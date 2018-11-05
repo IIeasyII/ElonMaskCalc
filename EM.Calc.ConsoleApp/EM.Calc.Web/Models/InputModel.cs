@@ -11,6 +11,11 @@ namespace EM.Calc.Web.Models
     public class InputModel
     {
         [Display(Name = "Операция")]
+        public string SelectedOperation { get; set; }
+        
+        public IEnumerable<SelectListItem> Operations { get; set; }
+
+        /*[Display(Name = "Операция")]
         [Required(ErrorMessage = "Нам обязательно нужно знать операцию")]
         public string Name { get; set; }
 
@@ -21,7 +26,11 @@ namespace EM.Calc.Web.Models
         [Required]
         public string Args { get; set; }
 
-        public SelectList Operations { get; set; }
+        /*[ScaffoldColumn(false)]
+        public SelectList Operations { get; set; }*/
+
+
+
 
         //public IList<IOperation> Operations { get; set; }
     }

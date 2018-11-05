@@ -5,6 +5,7 @@ using System.Web;
 
 namespace EM.Calc.Web.Models
 {
+
     public class OperationResult
     {
         public string Name { get; set; }
