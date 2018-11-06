@@ -10,28 +10,17 @@ namespace EM.Calc.Web.Models
 {
     public class InputModel
     {
-        [Display(Name = "Операция")]
-        public string SelectedOperation { get; set; }
-        
-        public IEnumerable<SelectListItem> Operations { get; set; }
+        public InputModel()
+        {
+            Operations = new List<IOperation>();
+        }
 
-        /*[Display(Name = "Операция")]
-        [Required(ErrorMessage = "Нам обязательно нужно знать операцию")]
+        [Display(Name = "Операция")]
         public string Name { get; set; }
 
-        /*[Display(Name = "Параметры1")]
-        public double[] Args1 { get; set; }*/
-
         [Display(Name = "Аргументы")]
-        [Required]
-        public string Args { get; set; }
+        public double[] Args { get; set; }
 
-        /*[ScaffoldColumn(false)]
-        public SelectList Operations { get; set; }*/
-
-
-
-
-        //public IList<IOperation> Operations { get; set; }
+        public IList<IOperation> Operations { get; set; }
     }
 }

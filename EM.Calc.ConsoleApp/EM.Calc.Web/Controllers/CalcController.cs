@@ -27,19 +27,9 @@ namespace EM.Calc.Web.Controllers
         [HttpGet]
         public ActionResult Input()
         {
-            List<string> list = new List<string>();
-
-            foreach (var item in calc.Operations)
-            {
-                list.Add(item.Name);
-            }
-
-            // Список операций
-            SelectList listOperations = new SelectList(list);
-
             var model = new InputModel()
             {
-                Operations = listOperations
+                Operations = calc.Operations
             };
 
             return View(model);
@@ -48,20 +38,19 @@ namespace EM.Calc.Web.Controllers
         [HttpPost]
         public ActionResult Input(InputModel model)
         {
-            model.SelectedOperation = Request.Form["Operations"].ToString();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            if (!calc.Operations.Any(m => m.Name == model.SelectedOperation))
+            if (!calc.Operations.Any(m => m.Name == model.Name))
             {
                 ModelState.AddModelError("Name", "Такой операции нет");
 
                 return View(model);
             }
 
-            var result = Calc(model.SelectedOperation, model.Args.Split(' ').Select(Convert.ToDouble).ToArray());
-
-            var values = model.Args.Split(' ')
-                    .Select(Convert.ToDouble)
-                    .ToArray();
+            var result = Calc(model.Name, model.Args);
 
             return View("Execute", result);
 
