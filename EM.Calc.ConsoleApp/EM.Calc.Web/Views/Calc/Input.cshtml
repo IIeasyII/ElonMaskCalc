@@ -58,8 +58,6 @@
             cache: false,
             data: $("#calcForm").serializeArray(),
             success: function (result) {
-                document.getElementById("clear1").remove()
-                document.getElementById("clear2").remove()
                 $("#result").html(result)
             }
         });

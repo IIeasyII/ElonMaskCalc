@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Calc.ConsoleApp", "EM.Calc.ConsoleApp\EM.Calc.ConsoleApp.csproj", "{603443CF-2FE4-4BFE-BB49-3AB5EC3DBC2A}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Calc.WinCalc", "EM.Calc.WinCalc\EM.Calc.WinCalc.csproj", "{6D785358-FFCF-46B0-B32F-66F0DA342788}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Calc.Web", "EM.Calc.Web\EM.Calc.Web.csproj", "{919EF321-3761-4BFA-8861-34C5264FD4EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EM.Calc.DB", "EM.Calc.DB\EM.Calc.DB.csproj", "{B2A02ED6-7ECF-41D8-AB19-032995467C69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{919EF321-3761-4BFA-8861-34C5264FD4EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{919EF321-3761-4BFA-8861-34C5264FD4EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{919EF321-3761-4BFA-8861-34C5264FD4EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A02ED6-7ECF-41D8-AB19-032995467C69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A02ED6-7ECF-41D8-AB19-032995467C69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A02ED6-7ECF-41D8-AB19-032995467C69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A02ED6-7ECF-41D8-AB19-032995467C69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

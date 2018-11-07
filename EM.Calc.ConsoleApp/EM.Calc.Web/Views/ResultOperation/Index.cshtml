@@ -1,0 +1,25 @@
+﻿@model EM.Calc.Web.Models.GetAllModel
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @Helpers.Button("GetAll", "GetAll()")
+</div>
+<div id="result"></div>
+
+
+<script>
+    function GetAll() {
+        var body = document.getElementById("result")
+
+        for (var i = 0; i < @Model.All.Count(); i++) {
+            body.appendChild(document.createTextNode("@Model.All.ElementAt(index)"))
+        }
+    }
+</script>
+

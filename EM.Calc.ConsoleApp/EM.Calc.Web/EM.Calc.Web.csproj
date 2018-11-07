@@ -124,10 +124,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CalcController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ResultOperationController.cs" />
+    <Compile Include="DB\DBHelper.cs" />
     <Compile Include="Extentions\Helpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetAllModel.cs" />
     <Compile Include="Models\InputModel.cs" />
     <Compile Include="Models\OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,8 +178,15 @@
     <Content Include="Views\Shared\EditorTemplates\doubles.cshtml" />
     <Content Include="Views\Calc\Execute.cshtml" />
     <Content Include="Views\Shared\Now.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\ResultOperation\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EM.Calc.DB\EM.Calc.DB.csproj">
+      <Project>{B2A02ED6-7ECF-41D8-AB19-032995467C69}</Project>
+      <Name>EM.Calc.DB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -184,6 +195,7 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
